@@ -1,0 +1,37 @@
+<fieldset>
+  <legend class="btn-warning">Registro de Usuario</legend>
+  <div *ngIf="!isValid" class="alert alert-danger">
+    <strong>Danger: </strong>{{message}}
+  </div>
+  <form>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputEmail4"><span class="required">*</span>Primer Nombre</label>
+          <input type="text" class="form-control" id="inputFirstName" name="firstName" [(ngModel)]="user.firstName"  placeholder="Primer Nombre"/>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">Segundo Nombre</label>
+          <input type="text" class="form-control" id="inputSecondName" name="secondName" [(ngModel)]="user.secondName" placeholder="Segundo Nombre"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputAddress"><span class="required">*</span>Primer Apellido:</label>
+          <input type="text" class="form-control" id="inputFirstSurname" name="firstSurname" [(ngModel)]="user.firstSurname" placeholder="Segundo Apellido"/>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputAddress2">Segundo Apellido</label>
+          <input type="text" class="form-control" id="inputSecondSurname" name="secondSurname" [(ngModel)]="user.secondSurname" placeholder="Segundo Apellido"/>
+        </div>
+      </div>
+        <div class="form-group">
+          <label for="inputCity">Telefono</label>
+          <input type="tel" class="form-control" id="inputPhone" name="phone" [(ngModel)]="user.phone" placeholder="+57 "/>
+        </div>
+        <div class="form-group">
+          <label for="inputState"><span class="required">*</span>Dirección</label>
+          <input type="text" class="form-control" name="address" [(ngModel)]="user.address" id="inputAddress"/>
+        </div>
+      <button type="submit" (click)="saveorUpdate()" class="btn btn-primary">Registrar</button>
+    </form>
+</fieldset>

@@ -20,6 +20,9 @@ export class UserComponent implements OnInit {
   }
 
   private loadUser(): void{
-    console.log(this.userService.getUsers());
+    this.userService.getUsers().subscribe(res => {
+      this.users = res;
+      console.log(res);
+    });
   }
 }
