@@ -1,7 +1,10 @@
 <fieldset>
   <legend class="btn-warning">Registro de Usuario</legend>
-  <div *ngIf="!isValid" class="alert alert-danger">
+  <div *ngIf="!isValid && showMessage" class="alert alert-danger" role="alert">
     <strong>Danger: </strong>{{message}}
+  </div>
+  <div *ngIf="isValid && showMessage" class="alert alert-success" role="alert">
+    <strong>Registro exitoso: </strong>{{message}}
   </div>
   <form>
       <div class="form-row">

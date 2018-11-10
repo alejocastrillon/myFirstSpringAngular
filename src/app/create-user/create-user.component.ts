@@ -1,6 +1,10 @@
+import { UserComponent } from './../user/user.component';
+import { RestResponse } from './../model/restResponse';
 import { CreateUserService } from './create-user.service';
 import { Component, OnInit } from '@angular/core';
 import { UserModel } from '../model/user.model';
+import { OK, NOT_ACCEPTABLE } from "../model/httpStatus";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-user',
@@ -13,15 +17,41 @@ export class CreateUserComponent implements OnInit {
   private user: UserModel;
   private isValid: boolean = true;
   private message: string = "";
+  private showMessage: boolean = false;
 
-  constructor(private service: CreateUserService) {
+  constructor(private service: CreateUserService, private router: Router) {
     this.user = new UserModel();
    }
 
   ngOnInit() {
   }
 
-  public saveorUpdate(): void{
+  public validateUser(): boolean{
+    if (!this.user.firstName) {
+      return false;
+    } else if (!this.user.firstSurname) {
+      return false;
+    } else if (!this.user.address) {
+      return false;
+    }
+    return true;
+  }
 
+  public saveorUpdate(): void{
+    console.log(this.user);
+    this.showMessage = true;
+    if (this.validateUser()) {
+      this.service.saveorUpdate(this.user).subscribe(res => {
+        console.log(res);
+        this.message = res.message;
+        if (res.responseCode == OK) {
+          this.router.navigate(['/userComponent']);
+          this.isValid = true;
+        }
+      });
+    } else {
+      this.isValid = false;
+      this.message = "Es necesario ingresar todos los datos";
+    }
   }
 }
