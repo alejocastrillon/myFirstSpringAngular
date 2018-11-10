@@ -18,9 +18,17 @@ export class CreateUserComponent implements OnInit {
   private isValid: boolean = true;
   private message: string = "";
   private showMessage: boolean = false;
+  private titleForm: string = "";
 
   constructor(private service: CreateUserService, private router: Router) {
-    this.user = new UserModel();
+    
+    if (sessionStorage.getItem('user')) {
+      this.user = JSON.parse(sessionStorage.getItem('user'));
+      this.titleForm = "Editar Usuario";
+    } else {
+      this.user = new UserModel();
+      this.titleForm = "Crear usuario";
+    }
    }
 
   ngOnInit() {

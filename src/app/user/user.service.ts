@@ -2,6 +2,7 @@ import { UserModel } from './../model/user.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
+import { RestResponse } from '../model/restResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -12,5 +13,9 @@ export class UserService {
 
   public getUsers(): Observable<UserModel[]>{
     return this.http.get<UserModel[]>("http://localhost:8080/getUsers");
+  }
+
+  public deleteUser(user:UserModel): Observable<RestResponse>{
+    return this.http.post<RestResponse>("http://localhost:8080/deleteUserviaPost", JSON.stringify(user));
   }
 }
